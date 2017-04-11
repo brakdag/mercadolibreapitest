@@ -104,8 +104,7 @@ $("#q").keypress(function(e) {
 			    		for (var i=0 ; i<limit; i++) 
 			    		{
 			    			try{
-			    			datos = datos + "{'id':" data2.results[i].id +",'titulo': " +data2.results[i].title + ", 'precio': " + data2.results[i].price + "}";
-
+			    			datos = datos + data2.results[i].id + "\t" + data2.results[i].title + "\t" + data2.results[i].price + "\r\n"; 
 							}
 							catch(err){
 						    datos = datos + "error:" + err +  "\r\n"; 	
