@@ -8,9 +8,11 @@
 
 <body>
 	<div class="container">
+		<div id="espacio">
 		<br/><br/><br/><br/><br/><br/>
-		<div class="row text-center col-md-8 col-md-offset-2">
-			<img src="img/logo.png" width="20%">
+		</div>
+		<div id='row' class="row text-center col-md-8 col-md-offset-2">
+			<img id="logo" src="img/logo.png" width="20%">
 			<div  class="input-group">
 				<input class="form-control" id="q" placeholder="Ingrese su búsqueda" type="text">
       			<span class="input-group-btn">
@@ -18,10 +20,9 @@
 			</div>
 			<button id="descargar" class="hide col-md-2 col-md-offet-2 btn btn-success">Descargar CSV
 			</button>	
-			<div class="progress"><div id="barra" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div></div>   
   		</div>
   	</div>	
-
+<div id="progreso"></div>
 <div id="tabla">
 </div>
 
@@ -61,9 +62,14 @@ function exportar(data) {
             
         }
 $("#q").keypress(function(e) {
+	$("#logo").hide(200);
+	$("#espacio").hide(200);
+    $('#row').removeClass('col-md-offset-2');
     if(e.which == 13) {
         $("#boton1").click();
     }
+    
+
 });
 
 
@@ -74,23 +80,20 @@ $("#q").keypress(function(e) {
 
 		url_call1 = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=1";
 		url_call = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=200&offset=";
-		
 		datos = "";
-		datosJSON = "{'datos':[]}";
-    	$.get( url_call1, function( data ) {
+		$.get( url_call1, function( data ) {
     		limit = 200;
     		total = parseInt(data.paging.total);
             sturges = Math.trunc(1+Math.log(total));
-    		$("#tabla").text( "número de resultados: " + total + "intervalos: " + sturges ); 
-               
-    		console.log( "número de paginas: " + Math.trunc(total/limit) ); 
-    		
+    		$("#tabla").text( "Número de resultados: " + total + " intervalos: " + sturges ); 
+
     		for(var j=0;j<(Math.trunc(total/limit));j++)
     		{
-    			$("#barra").attr("style", "width:" + j*limit/total*100 + "%");
+
+    			$("#progreso").text( j*limit/total*100 + "%");
+
     			console.log(url_call +j*limit);
 	    		$.get( url_call+(j*limit), function( data2 ) {
-			    		datosJSON = datosJSON.concat(data2); 
 			    		for (var i=0 ; i<limit; i++) 
 			    		{
 			    			try{
@@ -105,8 +108,6 @@ $("#q").keypress(function(e) {
 
 	$.get( url_call+(total-total % limit), function( data2 ) {
 				limit = parseInt(data2.paging.limit);
-						datosJSON = datosJSON.concat(data2); 
-						console.log(data2);	
 			    for (var i=0 ; i<(total % limit); i++) 
 			    		{
 			    			try{
@@ -119,20 +120,19 @@ $("#q").keypress(function(e) {
 			    		}
 
 			    });
-     
-	$("#barra").attr("style", "width:0%");
+     $("#progreso").text("100%");
 	    console.log("fin");
-	    console.log(datosJSON);
+	  $('#descargar').removeClass('hide');
+	  $('#descargar').addClass('show');
+	  
 
 	});
 });
 
+
 </script>
-
-<!-- Scripts cargados de urls -->
+<!--  Scripts cargados de urls-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 </body>
 </html>
