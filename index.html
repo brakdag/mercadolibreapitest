@@ -33,6 +33,7 @@
   	</div>	
 <div id="progreso"></div>
 <div id="tabla"></div>
+<div id="media"></div>
 <div id='defaults-graph' class='graph hide' style='width:400px; height:400px'></div>
     
 
@@ -135,17 +136,32 @@ $("#q").keypress(function(e) {
 						    datos = datos + "error:" + err +  "\r\n"; 
 							}
 			    		}
+	
+  var suma=0;
+  var suma_cuad=0;
+  // calcula la media
+       for(var i=0;i<precios.length;i++)
+       {
+       		suma += precios[i];
+       }
+var media = suma/precios.length;
+// calcula la varianza
+	for(var i=0;i<precios.length;i++)
+       {
+       		suma_cuad += Math.pow(precios[i]-media,2);
+       }
+        
+       var varianza = suma_cuad/precios.length;
+       var desviacion = Math.round(Math.sqrt(varianza)*100)/100;
+       $("#media").text('Media: '+ media + '$ desviacion: ' + desviacion +'$');
+	  
+			 });
 
-			    });
-     $("#progreso").text("100%");
-	    
-	  $('#descargar').removeClass('hide');
-	  $('#descargar').addClass('show');
-	 var maximo = Math.max(precios);
-	  console.log('valor maximo:' + maximo );
-	  console.log('valor minimo:' + Math.min.apply(null,precios) );
-	  console.log('intervalo de precios:' + (Math.max(precios)-Math.min(precios)));
+     $("#progreso").text("100%");  
+	 $('#descargar').removeClass('hide');
+	 $('#descargar').addClass('show');
 
+     
 
 
 	});
