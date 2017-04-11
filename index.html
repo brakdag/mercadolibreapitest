@@ -20,7 +20,10 @@
 			</div>
 			<button id="descargar" class="hide col-md-2 col-md-offet-2 btn btn-success">Descargar CSV
 			</button>	
+ 
+ 			<div id='advertencia'> <br/><br/> <p style="color:gray;">verifique que posee CORS para chrome, <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi">aquí</a> y actívela</p></div>
   		</div>
+ 
   	</div>	
 <div id="progreso"></div>
 <div id="tabla">
@@ -37,6 +40,9 @@ var url_call = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val()
 $("#descargar").click(function(){
 	exportar(datos);
 });
+
+
+
 
 function exportar(data) {
             
@@ -63,6 +69,7 @@ function exportar(data) {
         }
 $("#q").keypress(function(e) {
 	$("#logo").hide(200);
+	$("#advertencia").hide(200);
 	$("#espacio").hide(200);
     $('#row').removeClass('col-md-offset-2');
     if(e.which == 13) {
