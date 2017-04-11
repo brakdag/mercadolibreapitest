@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Listado de bandoneones</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<center>
+	<img src="http://www.yiqi.com.ar/wp-content/uploads/Logo-MercadoLibre.jpg" class="img img-rounded img-center" width=20% align="center">
+</center>
+<div class="container">
+<div class="jumbotron">
+	<h1>Descarga de datos de Mercadolibre.</h1>
+</div>
+<div class="row text-center">
+
+<button id="boton1" class="btn btn-success col-md-4">Listar Datos</button>
+<div id="div1"></div>
+<input class"input" id="q" type="text" placeholder="ingrese texto"></input>
+<button id="descargar" class="col-md-4 col-md-offet-2 btn btn-success">Descargar CSV</button>	
+</br></br></br>
+<div class="row">
+ <div class="progress col-md-8 col-md-offset-2">
+    <div id="barra" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+    </div>
+  </div>
+</div>
+</div>
+<h5>Desarrollado por brakdag</h5></div>
+<script>
+var total =0;
+var limit =0;
+var datos;
+var url_call1 = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=1"
+var url_call = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=200&offset="
+$("#descargar").click(function(){
+	exportar(datos);
+});
+
+function exportar(data) {
+            
+            if (navigator.appName == 'Microsoft Internet Explorer') {
+                
+                var popup = window.open('','csv','');
+                popup.document.body.innerHTML = '<pre>' + data + '</pre>';
+ 
+            }else{
+
+           var link = document.createElement('a');
+    	   link.download = "datos.csv";
+    	   link.href = 'data:text/csv; charset=utf8,' + encodeURIComponent(data);
+           link.click();
+             
+        //        location.href='data:text/csv; charset=utf8,' + encodeURIComponent(data);
+                
+            }
+ 
+            
+            return true;
+            
+            
+        }
+
+	$("#boton1").click(function(){
+	var URLactual = window.location;
+		if (URLactual!="https://brakdag.github.io/temp/ml.html"){
+					$("#q").val("");
+}
+		url_call1 = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=1";
+		url_call = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=200&offset=";
+		$("#q").hide('fast');
+		datos = "";
+    	$.get( url_call1, function( data ) {
+    		limit = 200;
+    		total = parseInt(data.paging.total);
+    		console.log( "número de resultados: " + total ); 
+    		console.log( "número de paginas: " + Math.trunc(total/limit) ); 
+    		
+    		for(var j=0;j<(Math.trunc(total/limit));j++)
+    		{
+    			$("#barra").attr("style", "width:" + j*limit/total*100 + "%");
+    			console.log(url_call +j*limit);
+	    		$.get( url_call+(j*limit), function( data2 ) {
+			    		for (var i=0 ; i<limit; i++) 
+			    		{
+			    			try{
+			    			datos = datos + data2.results[i].id + "\t" + data2.results[i].title + "\t" + data2.results[i].price + "\r\n"; 
+							}
+							catch(err){
+						    datos = datos + "error:" + err +  "\r\n"; 	
+							}
+			    						    	}
+				});
+	    	}
+
+	$.get( url_call+(total-total % limit), function( data2 ) {
+				limit = parseInt(data2.paging.limit);			
+			    for (var i=0 ; i<(total % limit); i++) 
+			    		{
+			    			try{
+			    			datos = datos + data2.results[i].id + "\t" + data2.results[i].title + "\t" + data2.results[i].price + "\r\n"; 
+							}
+							catch(err){
+						    datos = datos + "error:" + err +  "\r\n"; 	
+							}
+			    		}
+
+			    });
+
+	$("#barra").attr("style", "width:100%");
+    		
+	    console.log("fin");
+
+	});
+});
+
+</script>
+
+
+</body>
+</html>
