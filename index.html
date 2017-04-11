@@ -21,7 +21,7 @@
 			<button id="descargar" class="hide col-md-2 col-md-offet-2 btn btn-success">Descargar CSV
 			</button>	
  
- 			<div id='advertencia'> <br/><br/> <p style="color:gray;">verifique que posee CORS para chrome, <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi">aquí</a> y actívela</p></div>
+ 			<div id='advertencia'> <br/><br/> <p style="color:gray;">verifique que posee CORS <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi">Chrome</a> o <a href="https://addons.mozilla.org/es/firefox/addon/cross-domain-cors/">Firefox</a> y actívela</p></div>
   		</div>
  
   	</div>	
@@ -75,8 +75,6 @@ $("#q").keypress(function(e) {
     if(e.which == 13) {
         $("#boton1").click();
     }
-    
-
 });
 
 
@@ -94,17 +92,20 @@ $("#q").keypress(function(e) {
             sturges = Math.trunc(1+Math.log(total));
     		$("#tabla").text( "Número de resultados: " + total + " intervalos: " + sturges ); 
 
+
     		for(var j=0;j<(Math.trunc(total/limit));j++)
     		{
 
     			$("#progreso").text( j*limit/total*100 + "%");
 
     			console.log(url_call +j*limit);
+
 	    		$.get( url_call+(j*limit), function( data2 ) {
 			    		for (var i=0 ; i<limit; i++) 
 			    		{
 			    			try{
-			    			datos = datos + data2.results[i].id + "\t" + data2.results[i].title + "\t" + data2.results[i].price + "\r\n";
+			    			datos = datos + "{'id':" data2.results[i].id +",'titulo': " +data2.results[i].title + ", 'precio': " + data2.results[i].price + "}";
+
 							}
 							catch(err){
 						    datos = datos + "error:" + err +  "\r\n"; 	
