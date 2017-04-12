@@ -104,6 +104,8 @@ $("#q").keypress(function(e) {
 	$("#espacio").hide(200);
     $('#row').removeClass('col-md-offset-2');
     if(e.which == 13) {
+   $('#publicidad').removeClass('hide');
+   $('#publicidad').addClass('show');
         $("#boton1").click();
     }
 });
@@ -117,7 +119,8 @@ $("#q").keypress(function(e) {
 		pregunta = $("#q").val();
 		url_call1 = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=1";
 		url_call = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=200&offset=";
-		datos = "";
+	  $("#q").val("");
+  	datos = "";
 		$.get( url_call1, function( data ) {
     		limit = 200;
     		total = parseInt(data.paging.total);
@@ -205,8 +208,7 @@ var myChart = new Chart(ctx, {
     
 });
 			 });  
-	 $('#publicidad').removeClass('hide');
-	 $('#publicidad').addClass('show');
+	
 	});
 });
 
