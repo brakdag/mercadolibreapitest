@@ -107,8 +107,6 @@ $("#q").keypress(function(e) {
 	$("#espacio").hide(200);
     $('#row').removeClass('col-md-offset-2');
     if(e.which == 13) {
-   $('#publicidad').removeClass('hide');
-   $('#publicidad').addClass('show');
         $("#boton1").click();
     }
 });
@@ -210,6 +208,10 @@ var myChart = new Chart(ctx, {
     }
     
 });
+
+$('#publicidad').removeClass('hide');
+$('#publicidad').addClass('show');
+
 			 });  
 	
 	});
