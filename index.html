@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -112,7 +112,7 @@ $("#q").keypress(function(e) {
 	precios =[];
   var URLactual = window.location;
 	console.log(URLactual.href);
-		if (URLactual.href!="www.precios.ml"){$("#q").val("");}
+		if (URLactual.href!="http://www.precios.ml"){$("#q").val("");}
 		pregunta = $("#q").val();
 		url_call1 = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=1";
 		url_call = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=200&offset=";
