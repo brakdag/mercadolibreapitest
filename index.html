@@ -4,12 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Estadísticas de Mercadolibre</title>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	<script src="js/jquery.enumerable.js"></script>
-	<script src="js/jquery.tufte-graph.js"></script>
-	<script src="js/raphael.js"></script>
-
-	
-	<link rel="stylesheet" href="css/tufte-graph.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 </head>
 
 <body>
@@ -29,20 +24,27 @@
  
  			<div id='advertencia'> <br/><br/> <p style="color:gray;">verifique que posee CORS <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi">Chrome</a> o <a href="https://addons.mozilla.org/es/firefox/addon/cross-domain-cors/">Firefox</a> y actívela</p></div>
   		</div>
- 
-  	</div>	
+  	</div>
+  	<div id='row' class="row text-center col-md-4 col-md-offset-4">
+<canvas id="myChart" width="400px" height="400px"></canvas> 
+</div>			
 <div id="progreso"></div>
 <div id="tabla"></div>
 <div id="media"></div>
-<div id='defaults-graph' class='graph hide' style='width:400px; height:400px'></div>
-    
+<div witdh="50%">
+
+    </div>
 
 
 <script>
+var ctx = document.getElementById("myChart");
 var total =0;
 var limit =0;
 var datos;
 var precios = [];
+var sturges;
+var intervalo;
+var pregunta;
 var url_call1 = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=1"
 var url_call = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=200&offset="
 $("#descargar").click(function(){
@@ -92,7 +94,7 @@ $("#q").keypress(function(e) {
 	var URLactual = window.location;
 	console.log(URLactual.href);
 	//	if (URLactual.href!="https://brakdag.github.io/mercadolibreapitest/"){$("#q").val("");}
-
+		pregunta = $("#q").val();
 		url_call1 = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=1";
 		url_call = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=200&offset=";
 		datos = "";
@@ -144,7 +146,7 @@ $("#q").keypress(function(e) {
        {
        		suma += precios[i];
        }
-var media = suma/precios.length;
+var media = suma/precios.length*2;
 // calcula la varianza
 	for(var i=0;i<precios.length;i++)
        {
@@ -155,7 +157,36 @@ var media = suma/precios.length;
        var desviacion = Math.round(Math.sqrt(varianza)*100)/100;
        $("#media").text('Media: '+ Math.round(media*100)/100 + '$ desviacion: ' + desviacion +'$');
 	  
+     intervalo = new Array(sturges);
+    var marcadeclase = new Array(sturges);
+     for(var i=0;i<sturges;i++) intervalo[i]=0;
+       var c = media*2/sturges;
+	for(var i=0;i<sturges;i++) marcadeclase[i]= Math.round(c*(i+1)/2*100)/100 + "$";
+     
+       for(var i=0 ; i < precios.length; i++){
+       		for(var j=0 ;j<sturges;j++)
+       		{
+       			if ((precios[i]>(c*j)) && ( precios[i] < ( c * (j+1) ))){
+       				intervalo[j]++;
+       			}
+       		}
+       }
+
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: marcadeclase,
+        datasets: [{
+            data: intervalo,
+            borderWidth: 2
+        }]
+    }
+    
+});
+
+
 			 });
+
 
      $("#progreso").text("100%");  
 	 $('#descargar').removeClass('hide');
