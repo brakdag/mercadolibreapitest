@@ -25,7 +25,13 @@
  </div>
  	<!--		<div id='advertencia'> <br/><br/> <p style="color:gray;">verifique que posee CORS <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi">Chrome</a> o <a 
   href="https://addons.mozilla.org/es/firefox/addon/cross-domain-cors/">Firefox</a> y actívela</p></div>-->
-<div id="publicidad" class="hide">
+  		
+  	
+  
+    <br/>
+     
+  	<div id='row' class="row text-center ">
+    <div id='publicidad' class='col-md-4'>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- mercadolibretestapi -->
 <ins class="adsbygoogle"
@@ -36,17 +42,8 @@
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-</div>
 
-  		
-  	
-  
-    <br/>
-     
-  	<div id='row' class="row text-center ">
-    <div class='col-md-4'>
-        
-<div>
+    </div>
     <div class='col-md-4'>
         <canvas id="myChart" width="400" height="400"></canvas> 
 <div id="tabla"></div></div>
@@ -119,7 +116,7 @@ $("#q").keypress(function(e) {
 	precios =[];
   var URLactual = window.location;
 	console.log(URLactual.href);
-		if (URLactual.href!="https://brakdag.github.io/mercadolibreapitest/index.html"){$("#q").val("");}
+//		if (URLactual.href!="https://brakdag.github.io/mercadolibreapitest/index.html"){$("#q").val("");}
 		pregunta = $("#q").val();
 		url_call1 = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=1";
 		url_call = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=200&offset=";
