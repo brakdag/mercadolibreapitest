@@ -113,6 +113,10 @@ $("#q").keypress(function(e) {
 
 
 	$("#boton1").click(function(){
+
+    $('#publicidad').removeClass('hide');
+    $('#publicidad').addClass('show');
+
 	precios =[];
   var URLactual = window.location;
 	console.log(URLactual.href);
@@ -209,8 +213,6 @@ var myChart = new Chart(ctx, {
     
 });
 
-$('#publicidad').removeClass('hide');
-$('#publicidad').addClass('show');
 
 			 });  
 	
