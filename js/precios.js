@@ -10,8 +10,7 @@ var url_call1 = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val(
 var url_call = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=200&offset="
 
 $(document).ready(function () {
-$('#publicidad').addClass('hide');
-   
+    $('#publicidad').addClass('hide');
      });
 
 $("#q").keypress(function(e) {
