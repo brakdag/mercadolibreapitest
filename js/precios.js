@@ -25,6 +25,8 @@ $("#q").keypress(function(e) {
 
 
 	$("#boton1").click(function(){
+  
+ ga('send', 'event', 'busqueda', 'buscar', 'busqueda',1);
 
     $('#publicidad').removeClass('hide');
     $('#publicidad').addClass('show');
