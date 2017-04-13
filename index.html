@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Estadísticas de Mercadolibre</title>
+	<title>precios.ml</title>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 </head>
@@ -22,205 +23,33 @@
         		<button class="btn btn-default" id="boton1"><span aria-hidden="true" class="glyphicon glyphicon-search"></span>  Buscar</button></span>
 			</div>
 			</div>
- </div>
- 	<!--		<div id='advertencia'> <br/><br/> <p style="color:gray;">verifique que posee CORS <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi">Chrome</a> o <a 
-  href="https://addons.mozilla.org/es/firefox/addon/cross-domain-cors/">Firefox</a> y actívela</p></div>-->
-  		
-  	
-  
+</div>
     <br/>
-     
+
   	<div id='row' class="row text-center ">
-    <div id='publicidad' class='col-md-4'>
+      <div id='publicidad' class='col-md-4'>
       
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- mercadolibretestapi -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7673275133354828"
-     data-ad-slot="8977573101"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <!-- mercadolibretestapi -->
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-7673275133354828"
+               data-ad-slot="8977573101"
+               data-ad-format="auto"></ins>
+          <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
 
     </div>
     <div class='col-md-4'>
         <canvas id="myChart" width="400" height="400"></canvas> 
 <div id="tabla"></div></div>
         <br/><br/>
-<!--<center>
-
-    <button id="descargar" class="hide btn btn-success">Descargar CSV</button> 
-      </center>-->   
-
    </div>
  
 
-<script>
-var ctx = document.getElementById("myChart");
-var total =0;
-var limit =0;
-var datos={};
-var precios = [];
-var sturges=0;
-var intervalo={};
-var pregunta="";
-var url_call1 = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=1"
-var url_call = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=200&offset="
-$("#descargar").click(function(){
-	exportar(datos);
-});
-
-$(document).ready(function () {
-$('#publicidad').addClass('hide');
-   
-     });
-
-
-function exportar(data) {
-            
-            if (navigator.appName == 'Microsoft Internet Explorer') {
-                
-                var popup = window.open('','csv','');
-                popup.document.body.innerHTML = '<pre>' + data + '</pre>';
  
-            }else{
-
-           var link = document.createElement('a');
-    	   link.download = "datos.csv";
-    	   link.href = 'data:text/csv; charset=utf8,' + encodeURIComponent(data);
-           link.click();
-             
-        //        location.href='data:text/csv; charset=utf8,' + encodeURIComponent(data);
-                
-            }
- 
-            
-            return true;
-            
-            
-        }
-$("#q").keypress(function(e) {
-	$("#logo").hide(200);
-	$("#advertencia").hide(200);
-	$("#espacio").hide(200);
-    $('#row').removeClass('col-md-offset-2');
-    if(e.which == 13) {
-        $("#boton1").click();
-    }
-});
-
-
-	$("#boton1").click(function(){
-
-    $('#publicidad').removeClass('hide');
-    $('#publicidad').addClass('show');
-
-	precios =[];
-  var URLactual = window.location;
-	console.log(URLactual.href);
-//		if (URLactual.href!="https://brakdag.github.io/mercadolibreapitest/index.html"){$("#q").val("");}
-		pregunta = $("#q").val();
-		url_call1 = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=1";
-		url_call = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=200&offset=";
-	  $("#q").val("");
-  	datos = "";
-		$.get( url_call1, function( data ) {
-    		limit = 200;
-    		total = parseInt(data.paging.total);
-            sturges = Math.trunc(1+Math.log(total));
-    		$("#tabla").text( "Número de resultados: " + total ); 
-
-
-    		for(var j=0;j<(Math.trunc(total/limit));j++)
-    		{
-
-  
-    			console.log(url_call +j*limit);
-
-	    		$.get( url_call+(j*limit), function( data2 ) {
-			    		for (var i=0 ; i<limit; i++) 
-			    		{
-			    			try{
-			    			datos = datos + data2.results[i].id + "\t" + data2.results[i].title + "\t" + data2.results[i].price + "\r\n"; 
-			    			precios.push( parseFloat(data2.results[i].price));
-							}
-							catch(err){
-						    datos = datos + "error:" + err +  "\r\n"; 	
-							}
-			    						    	}
-				});
-	    	}
-
-	$.get( url_call+(total-total % limit), function( data2 ) {
-				limit = parseInt(data2.paging.limit);
-			    for (var i=0 ; i<(total % limit); i++) 
-			    		{
-			    			try{
-			    			datos = datos + data2.results[i].id + "\t" + data2.results[i].title + "\t" + data2.results[i].price + "\r\n"; 
-			    			precios.push( parseFloat(data2.results[i].price));
-							}
-							catch(err){
-						    datos = datos + "error:" + err +  "\r\n"; 
-							}
-			    		}
-	
-  var suma=0;
-  var suma_cuad=0;
-  // calcula la media
-       for(var i=0;i<precios.length;i++)
-       {
-       		suma += precios[i];
-       }
-var media = suma/precios.length;
-// calcula la varianza
-	for(var i=0;i<precios.length;i++)
-       {
-       		suma_cuad += Math.pow(precios[i]-media,2);
-       }
-        
-       var varianza = suma_cuad/precios.length;
-       var desviacion = Math.round(Math.sqrt(varianza)*100)/100;
-      // $("#media").text('Media: '+ Math.round(media*100)/100 + '$ desviacion: ' + desviacion +'$');
-	  
-     intervalo = new Array(sturges);
-    var marcadeclase = new Array(sturges);
-     for(var i=0;i<sturges;i++) intervalo[i]=0;
-       var c = media*2/sturges;
-	for(var i=0;i<sturges;i++) marcadeclase[i]= Math.round( c*(i+1)) + "$";
-     
-       for(var i=0 ; i < precios.length; i++){
-       		for(var j=0 ;j<sturges;j++)
-       		{
-       			if ((precios[i]>(c*j)) && ( precios[i] < ( c * (j+1) ))){
-       				intervalo[j]++;
-       			}
-       		}
-       }
-
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: marcadeclase,
-        datasets: [{
-            label: pregunta,
-            data: intervalo,
-            borderWidth: 2,
-            backgroundColor: 'rgba(55, 99, 255, 0.2)'
-        }]
-    }
-    
-});
-
-
-			 });  
-	
-	});
-});
-
-
-</script>
+<script src='js/precios.js'></script>
 <!--  Scripts cargados de urls-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
