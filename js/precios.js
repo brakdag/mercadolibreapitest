@@ -42,7 +42,7 @@ $("#q").keypress(function(e) {
     		limit = 200;
     		total = parseInt(data.paging.total);
             sturges = Math.trunc(1+Math.log(total));
-    		$("#tabla").text( "Número de resultados: " + total ); 
+    		$("#tabla").html( "<span class='label label-success' >A partir de " + total +" datos</span>" ); 
 
 
     		for(var j=0;j<(Math.trunc(total/limit));j++)
