@@ -1,4 +1,5 @@
 # mercadolibreapitest
+[![Analytics](https://ga-beacon.appspot.com/UA-42105589-4/mercadolibreapitest/visita?flat)](https://github.com/igrigorik/ga-beacon)
 
 testing mercadolibre api
 
@@ -8,4 +9,3 @@ This page is an example of the use of the api of mercadolibre, elaborates from a
 
 try it on [www.precios.ml](http://www.precios.ml/)
 
-[![Analytics](https://ga-beacon.appspot.com/UA-42105589-4/mercadolibreapitest/visita?flat)](https://github.com/igrigorik/ga-beacon)
