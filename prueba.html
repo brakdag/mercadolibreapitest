@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+  <title>precios ml</title>
+  <link rel='shortcut icon' type='image/x-icon' href='img/favicon.ico' />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta property="og:url"           content="http://www.precios.ml/" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="precios.ml" />
+  <meta property="og:description"   content="Estadísticas de precios online." />
+  <meta property="og:image"         content="http://brakdag.github.io/mercadolibreapitest/img/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@flickr" />
+  <meta name="twitter:title" content="PRECIOS ML" />
+  <meta name="twitter:description" content="Estadísticas de precios de Mercadolibre al instante." />
+  <meta name="twitter:image" content="https://brakdag.github.io/mercadolibreapitest/img/logo.png" />
+	</head>
+
+<body>
+	<div class="container">
+		<div id="espacio"><br/><br/><br/><br/><br/><br/></div>
+		<div id='row' class="row text-center col-md-8 col-md-offset-2 col-sm-12">
+      <img id="logo" src="img/logo.png" height="100px">
+      <br/><br/></img>
+			<div  class="input-group">
+				<input class="form-control" id="q" placeholder="Ingrese su búsqueda" type="text">
+      			<span class="input-group-btn">
+        		<button class="btn btn-default" id="boton1">
+              <span aria-hidden="true" class="glyphicon glyphicon-search"></span> Buscar</button>
+            </span>
+			</div>
+		</div>
+  </div>
+  <div class="row text-center ">
+    
+    <div class='row col-md-4 col-md-offset-4 col-sm-12'>
+        <canvas id="myChart" width="400" height="400"></canvas> 
+      <div id="tabla"></div>
+    </div>
+   <div id='publicidad' class='col-md-12'>
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <!-- mercadolibretestapi -->
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7673275133354828" data-ad-slot="8977573101" data-ad-format="auto"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+
+      <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://precios.ml/" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+      <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.8&appId=1180353042073449";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+      <div class="fb-share-button" data-href="http://precios.ml/" data-layout="button" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fprecios.ml%2F&amp;src=sdkpreparse">Compartir</a></div>
+    </div>
+
+   </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script> 
+  <script src='js/precios.js'></script>
+  <script src='js/pais.js'></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-42105589-3', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+</body>
+</html>

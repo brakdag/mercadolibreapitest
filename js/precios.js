@@ -6,8 +6,6 @@ var precios = [];
 var sturges=0;
 var intervalo={};
 var pregunta="";
-var url_call1 = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=1"
-var url_call = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=200&offset="
 
 $(document).ready(function () {
     $('#publicidad').addClass('hide');
@@ -25,7 +23,7 @@ $("#q").keypress(function(e) {
 
 
 	$("#boton1").click(function(){
-  
+
  ga('send', 'event', 'busqueda', 'buscar', 'busqueda',1);
 
     $('#publicidad').removeClass('hide');
@@ -36,8 +34,8 @@ $("#q").keypress(function(e) {
 	console.log(URLactual.href);
 //		if (URLactual.href!="https://brakdag.github.io/mercadolibreapitest/index.html"){$("#q").val("");}
 		pregunta = $("#q").val();
-		url_call1 = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=1";
-		url_call = "https://api.mercadolibre.com/sites/MLA/search?q="+ $("#q").val() +"&limit=200&offset=";
+		var url_call1 = "https://api.mercadolibre.com/sites/"+ CPAIS +"/search?q="+ $("#q").val() +"&limit=1";
+		var url_call = "https://api.mercadolibre.com/sites/"+ CPAIS +"/search?q="+ $("#q").val() +"&limit=200&offset=";
 	  $("#q").val("");
   	datos = "";
 		$.get( url_call1, function( data ) {
