@@ -31,6 +31,7 @@ $("#q").keypress(function(e) {
 
 	precios =[];
   var URLactual = window.location;
+  var CPAIS = "MLA";
 	console.log(URLactual.href);
 //		if (URLactual.href!="https://brakdag.github.io/mercadolibreapitest/index.html"){$("#q").val("");}
 		pregunta = $("#q").val();

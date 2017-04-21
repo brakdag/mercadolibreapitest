@@ -1,4 +1,4 @@
-var CPAIS = ""
+var CPAIS = "MLA"
 var codigo = {
 			"Argentina": "MLA" ,
 			Brasil: "MLB" ,
