@@ -19,7 +19,7 @@ var codigo = {
 $.getJSON('http://api.wipmania.com/jsonp?callback=?', function (data) {
     var pais = data.address.country;
 	CPAIS = codigo[pais];
-	console.log(CPAIS);
+	if (CPAIS==null) CPAIS = "MLA"
 });
 
 
