@@ -1,6 +1,6 @@
 var CPAIS = ""
 var codigo = {
-			"Argentina": "MLA" ,
+			Argentina: "MLA" ,
 			Brasil: "MLB" ,
 			Uruguay: "MLU" ,
 			Chile: "MLC" ,
@@ -17,8 +17,10 @@ var codigo = {
 
 
 $.getJSON('http://api.wipmania.com/jsonp?callback=?', function (data) {
-    var pais = data.address.country;
+	var pais = data.address.country;
+	console.log(pais);
 	CPAIS = codigo[pais];
+	if (CPAIS==null) CPAIS = "MLA";
 });
 
 
